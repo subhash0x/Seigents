@@ -62,6 +62,13 @@ export interface TokenData {
 	imageUrl: string;
 	description: string;
 	transactionHash?: string;
+	// Token metrics
+	tokenHolders?: number;
+	volume24h?: number;
+	circulatingSupply?: number;
+	totalSupply?: number;
+	marketCap?: number;
+	currentPrice?: number;
 }
 export interface TypeInfo {
 	title: string;

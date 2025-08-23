@@ -229,26 +229,22 @@ const SwapWidget = ({
 					</div>
 
 					<div className="space-y-2">
-						<Label>Select Token</Label>
-						<Select
-							value={selectedToken}
-							onValueChange={setSelectedToken}
-							disabled={isLoading}
-						>
-							<SelectTrigger>
-								<SelectValue placeholder="Select a token" />
-							</SelectTrigger>
-							<SelectContent>
-								{allTokens?.map((token) => (
-									<SelectItem
-										key={token.tokenAddress}
-										value={token.tokenAddress}
-									>
-										{token.name} ({token.symbol})
-									</SelectItem>
-								))}
-							</SelectContent>
-						</Select>
+						<Label>Current Token</Label>
+						<div className="p-3 rounded-lg border border-white/10 bg-background/20 backdrop-blur-sm">
+							<div className="flex items-center justify-between">
+								<span className="text-sm font-medium text-foreground">
+									{defaultTokenInfo?.name || "Token"}
+								</span>
+								<span className="text-xs font-mono text-muted-foreground">
+									${defaultTokenInfo?.symbol || "TKN"}
+								</span>
+							</div>
+							{defaultTokenInfo?.address && (
+								<div className="mt-1 text-xs text-muted-foreground font-mono">
+									{`${defaultTokenInfo.address.slice(0, 6)}...${defaultTokenInfo.address.slice(-4)}`}
+								</div>
+							)}
+						</div>
 					</div>
 
 					<div className="space-y-2">

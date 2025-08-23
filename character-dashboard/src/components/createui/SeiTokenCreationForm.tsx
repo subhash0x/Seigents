@@ -68,6 +68,13 @@ export function SeiTokenCreationForm({
 					...formData,
 					address: tokenCreatedLog?.address || "0x...",
 					transactionHash: hash,
+					// Dummy token metrics
+					tokenHolders: 800,
+					volume24h: 8000,
+					circulatingSupply: 1200000,
+					totalSupply: 10000000,
+					marketCap: 300000,
+					currentPrice: 0.25,
 				};
 
 				return tokenData;

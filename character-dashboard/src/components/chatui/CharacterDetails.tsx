@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BookOpen, Wallet } from "lucide-react";
 import { formatEther } from "viem";
+import { TokenMetrics } from "@/components/TokenMetrics";
 
 export const CharacterDetails = ({ character, backgroundUrl }) => (
 	<Sheet>
@@ -88,6 +89,27 @@ export const CharacterDetails = ({ character, backgroundUrl }) => (
 								<li key={i}>{item}</li>
 							))}
 						</ul>
+					</div>
+				)}
+
+				{/* Token Metrics */}
+				{character?.token && (
+					<div>
+						<h3 className="font-semibold mb-2">Token Metrics</h3>
+						<TokenMetrics
+							tokenData={{
+								address: character.token.address,
+								name: character.token.name,
+								symbol: character.token.symbol,
+								tokenHolders: 800,
+								volume24h: 8000,
+								circulatingSupply: 1200000,
+								totalSupply: 10000000,
+								marketCap: 300000,
+								currentPrice: 0.25,
+							}}
+							className="mt-3"
+						/>
 					</div>
 				)}
 			</div>

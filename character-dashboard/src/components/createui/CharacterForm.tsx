@@ -142,13 +142,21 @@ export function CharacterForm({
 			if (receipt.status === "success" && tokenCreationLog) {
 				const tokenAddress = `0x${tokenCreationLog.topics[2].slice(26)}`;
 
-				// Create token data object
+				// Create token data object with dummy metrics
 				const tokenData = {
 					address: tokenAddress,
 					transactionHash: hash,
 					name: characterData.name,
 					symbol: characterData.name.slice(0, 4).toUpperCase(),
 					imageUrl: `https://api.dicebear.com/7.x/shapes/svg?seed=${tokenAddress}`,
+					description: characterData.description || `Token for ${characterData.name}`,
+					// Dummy token metrics
+					tokenHolders: 800,
+					volume24h: 8000,
+					circulatingSupply: 1200000,
+					totalSupply: 10000000,
+					marketCap: 300000,
+					currentPrice: 0.25,
 				};
 
 				// Update state with token data

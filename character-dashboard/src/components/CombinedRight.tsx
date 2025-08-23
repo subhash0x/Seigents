@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import SwapWidget from "./SwapWidget";
 import CharacterFlow from "./CharacterFlow";
+import { TokenMetrics } from "./TokenMetrics";
 import { PTOKEN_ABI } from "./createui/ptokenabi";
 import { abi } from "./createui/abi";
 import { Address } from "viem";
@@ -39,9 +40,15 @@ const CombinedRightPanel = ({ character }: CharacterFlowProps) => {
 			{/* Content with glass effect */}
 			<Card className="relative h-full border-0 bg-transparent">
 				<CardContent className="p-4 h-full">
-					<Tabs defaultValue="swap" className="h-full">
+					<Tabs defaultValue="metrics" className="h-full">
 						{/* Enhanced tabs styling */}
-						<TabsList className="grid w-full grid-cols-2 bg-background/20 backdrop-blur-sm rounded-lg border border-white/10">
+						<TabsList className="grid w-full grid-cols-3 bg-background/20 backdrop-blur-sm rounded-lg border border-white/10">
+							<TabsTrigger
+								value="metrics"
+								className="data-[state=active]:bg-primary/20 data-[state=active]:backdrop-blur-lg transition-all duration-200"
+							>
+								Token Metrics
+							</TabsTrigger>
 							<TabsTrigger
 								value="swap"
 								className="data-[state=active]:bg-primary/20 data-[state=active]:backdrop-blur-lg transition-all duration-200"
@@ -55,6 +62,30 @@ const CombinedRightPanel = ({ character }: CharacterFlowProps) => {
 								Character View
 							</TabsTrigger>
 						</TabsList>
+
+						{/* Token Metrics content */}
+						<TabsContent
+							value="metrics"
+							className="h-[calc(100%-48px)] mt-4 relative z-10 rounded-lg bg-background/10 backdrop-blur-sm border border-white/10"
+						>
+							{character?.token && (
+								<div className="h-full overflow-y-auto p-4">
+									<TokenMetrics
+										tokenData={{
+											address: character.token.address,
+											name: character.token.name,
+											symbol: character.token.symbol,
+											tokenHolders: 800,
+											volume24h: 8000,
+											circulatingSupply: 1200000,
+											totalSupply: 10000000,
+											marketCap: 300000,
+											currentPrice: 0.25,
+										}}
+									/>
+								</div>
+							)}
+						</TabsContent>
 
 						{/* Swap content with adjusted positioning */}
 						<TabsContent

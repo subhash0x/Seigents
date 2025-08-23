@@ -16,6 +16,7 @@ import CombinedRightPanel from "../CombinedRight";
 import BackgroundMedia, { useNekoBackground } from "./BackgroundMedia";
 import Message from "./Message";
 import { CharacterDetails, WalletDetails } from "./CharacterDetails";
+import { TokenMetrics } from "@/components/TokenMetrics";
 
 const ChatInterface = () => {
 	// State management

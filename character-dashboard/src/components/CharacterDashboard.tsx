@@ -31,6 +31,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Navbar from "@/components/Navbar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
+import { TokenMetrics } from "@/components/TokenMetrics";
 
 interface Character {
   id: string;
@@ -229,6 +230,25 @@ const CharacterCard = ({
                 </Badge>
               )}
             </div>
+            {/* Token Metrics */}
+            {character.token_address && (
+              <div className="mt-4">
+                <TokenMetrics
+                  tokenData={{
+                    address: character.token_address,
+                    name: character.token_name || character.name,
+                    symbol: character.token_symbol || character.name.slice(0, 4).toUpperCase(),
+                    tokenHolders: 800,
+                    volume24h: 8000,
+                    circulatingSupply: 1200000,
+                    totalSupply: 10000000,
+                    marketCap: 300000,
+                    currentPrice: 0.25,
+                  }}
+                  className="mt-3"
+                />
+              </div>
+            )}
             <div className="pt-2">
               <div className="flex justify-between text-sm mb-2">
                 <span className="text-muted-foreground">Engagement Score</span>
@@ -292,9 +312,30 @@ const CharacterCard = ({
         </div>
       </CardHeader>
       <CardContent>
-        <Badge variant="outline" className="font-mono sei-border-gradient">
-          {shortenAddress(character.evm_address)}
-        </Badge>
+        <div className="space-y-3">
+          <Badge variant="outline" className="font-mono sei-border-gradient">
+            {shortenAddress(character.evm_address)}
+          </Badge>
+          {/* Token Metrics for regular cards */}
+          {character.token_address && (
+            <div className="mt-3">
+              <TokenMetrics
+                tokenData={{
+                  address: character.token_address,
+                  name: character.token_name || character.name,
+                  symbol: character.token_symbol || character.name.slice(0, 4).toUpperCase(),
+                  tokenHolders: 800,
+                  volume24h: 8000,
+                  circulatingSupply: 1200000,
+                  totalSupply: 10000000,
+                  marketCap: 300000,
+                  currentPrice: 0.25,
+                }}
+                className="mt-3"
+              />
+            </div>
+          )}
+        </div>
       </CardContent>
       <CardFooter className="flex justify-between gap-2 mt-auto pt-4 border-t">
         <Button
@@ -382,10 +423,47 @@ const GameCard = ({
                 {shortenAddress(game.evm_address)}
               </Badge>
             )}
+                                         {game.token?.address && (
+           <Badge variant="outline" className="font-mono">
+             {shortenAddress(game.token.address)}
+           </Badge>
+         )}
+         {/* Token Metrics for regular games */}
+         {game.token?.address && (
+           <div className="mt-3">
+             <TokenMetrics
+               tokenData={{
+                 address: game.token.address,
+                 name: game.name,
+                 symbol: `GAME${game.name.slice(0, 2).toUpperCase()}`,
+                 tokenHolders: 800,
+                 volume24h: 8000,
+                 circulatingSupply: 1200000,
+                 totalSupply: 10000000,
+                 marketCap: 300000,
+                 currentPrice: 0.25,
+               }}
+               className="mt-3"
+             />
+           </div>
+         )}
             {game.token?.address && (
-              <Badge variant="outline" className="font-mono">
-                {shortenAddress(game.token.address)}
-              </Badge>
+              <div className="mt-4">
+                <TokenMetrics
+                  tokenData={{
+                    address: game.token.address,
+                    name: game.name,
+                    symbol: `GAME${game.name.slice(0, 2).toUpperCase()}`,
+                    tokenHolders: 800,
+                    volume24h: 8000,
+                    circulatingSupply: 1200000,
+                    totalSupply: 10000000,
+                    marketCap: 300000,
+                    currentPrice: 0.25,
+                  }}
+                  className="mt-3"
+                />
+              </div>
             )}
           </div>
         </CardContent>
@@ -426,6 +504,25 @@ const GameCard = ({
           <Badge variant="outline" className="font-mono">
             {shortenAddress(game.token.address)}
           </Badge>
+        )}
+        {/* Token Metrics for regular games */}
+        {game.token?.address && (
+          <div className="mt-3">
+            <TokenMetrics
+              tokenData={{
+                address: game.token.address,
+                name: game.name,
+                symbol: `GAME${game.name.slice(0, 2).toUpperCase()}`,
+                tokenHolders: 800,
+                volume24h: 8000,
+                circulatingSupply: 1200000,
+                totalSupply: 10000000,
+                marketCap: 300000,
+                currentPrice: 0.25,
+              }}
+              className="mt-3"
+            />
+          </div>
         )}
       </CardContent>
       <CardFooter className="flex justify-end gap-2 mt-auto pt-4 border-t">

@@ -113,7 +113,15 @@ export function GameForm({
                 transactionHash: hash,
                 name: gameData.name,
                 symbol: `GAME${gameData.name.slice(0, 2).toUpperCase()}`,
-                imageUrl: `https://api.dicebear.com/7.x/shapes/svg?seed=${tokenAddress}`
+                imageUrl: `https://api.dicebear.com/7.x/shapes/svg?seed=${tokenAddress}`,
+                description: gameData.theme || `Game token for ${gameData.name}`,
+                // Dummy token metrics
+                tokenHolders: 800,
+                volume24h: 8000,
+                circulatingSupply: 1200000,
+                totalSupply: 10000000,
+                marketCap: 300000,
+                currentPrice: 0.25,
             };
 
             setGameData(prev => ({ ...prev, token: tokenData }));

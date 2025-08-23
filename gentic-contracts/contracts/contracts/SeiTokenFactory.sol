@@ -34,6 +34,13 @@ contract SeiTokenFactory is Ownable {
         address tokenAddress;
         address creatorAddress;
         uint256 createdAt;
+        // Token metrics
+        uint256 tokenHolders;
+        uint256 volume24h;
+        uint256 circulatingSupply;
+        uint256 totalSupply;
+        uint256 marketCap;
+        uint256 currentPrice;
     }
 
     address[] public memeTokenAddresses;
@@ -77,7 +84,7 @@ contract SeiTokenFactory is Ownable {
         MemeToken newToken = new MemeToken(name, symbol, INITIAL_SUPPLY, msg.sender);
         address tokenAddress = address(newToken);
         
-        // Store token info
+        // Store token info with dummy metrics
         TokenInfo memory newTokenInfo = TokenInfo({
             name: name,
             symbol: symbol,
@@ -86,7 +93,14 @@ contract SeiTokenFactory is Ownable {
             fundingRaised: 0,
             tokenAddress: tokenAddress,
             creatorAddress: msg.sender,
-            createdAt: block.timestamp
+            createdAt: block.timestamp,
+            // Initialize with dummy metrics
+            tokenHolders: 800,
+            volume24h: 8000 * 10**18, // $8000 in wei
+            circulatingSupply: 1200000 * 10**18, // 1.2M tokens
+            totalSupply: 10000000 * 10**18, // 10M tokens
+            marketCap: 300000 * 10**18, // $300,000 in wei
+            currentPrice: 25 * 10**16 // $0.25 in wei (25 * 10^16 = 0.25 * 10^18)
         });
         
         memeTokenAddresses.push(tokenAddress);
