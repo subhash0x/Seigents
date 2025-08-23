@@ -77,7 +77,7 @@ contract GeneticAgent is Ownable, ReentrancyGuard, IGenetics {
             newAgent.dna.traits[initialTraits[i]] = Trait({
                 value: traitValues[i],
                 dominance: 50, // Default dominance
-                mutable: true
+                isMutable: true
             });
             newAgent.dna.traitKeys.push(initialTraits[i]);
         }
@@ -105,7 +105,7 @@ contract GeneticAgent is Ownable, ReentrancyGuard, IGenetics {
         Agent storage agent = agents[id];
         
         for (uint i = 0; i < traitsToEvolve.length; i++) {
-            require(agent.dna.traits[traitsToEvolve[i]].mutable, "Trait not mutable");
+            require(agent.dna.traits[traitsToEvolve[i]].isMutable, "Trait not mutable");
             
             // Evolution logic - can be customized
             uint256 oldValue = agent.dna.traits[traitsToEvolve[i]].value;

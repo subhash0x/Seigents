@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import fs from 'fs/promises';
 import path from 'path';
+import { Request, Response } from 'express';
 
 // Load environment variables
 dotenv.config();
@@ -173,7 +174,7 @@ CRITICAL INSTRUCTION: While maintaining the character's core identity, prioritiz
 // Routes
 
 // Health check
-app.get('/health', (req, res) => {
+app.get('/health', (req: Request, res: Response) => {
     res.json({ 
         status: 'ok', 
         timestamp: new Date().toISOString(),
@@ -182,7 +183,7 @@ app.get('/health', (req, res) => {
 });
 
 // Get character by name
-app.get('/characters/:name', async (req, res) => {
+app.get('/characters/:name', async (req: Request, res: Response) => {
     try {
         const characterName = decodeURIComponent(req.params.name).toLowerCase();
         console.log(`Fetching character: ${characterName}`);
@@ -214,7 +215,7 @@ app.get('/characters/:name', async (req, res) => {
 });
 
 // Chat with character
-app.post('/chat/:characterName', async (req, res) => {
+app.post('/chat/:characterName', async (req: Request, res: Response) => {
     try {
         const characterName = decodeURIComponent(req.params.characterName).toLowerCase();
         const { message, userId, conversationHistory, context }: ChatRequest = req.body;
@@ -349,7 +350,7 @@ app.post('/chat/:characterName', async (req, res) => {
 });
 
 // List all characters
-app.get('/characters', (req, res) => {
+app.get('/characters', (req: Request, res: Response) => {
     try {
         const characters = Array.from(charactersCache.values()).map(char => ({
             name: char.name,
@@ -374,7 +375,7 @@ app.get('/characters', (req, res) => {
 });
 
 // Error handling middleware
-app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+app.use((err: any, req: Request, res: Response, next: express.NextFunction) => {
     console.error('Unhandled error:', err);
     res.status(500).json({ 
         error: 'Internal server error',
@@ -383,7 +384,7 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
 });
 
 // 404 handler
-app.use((req, res) => {
+app.use((req: Request, res: Response) => {
     res.status(404).json({ 
         error: 'Not found',
         path: req.path,

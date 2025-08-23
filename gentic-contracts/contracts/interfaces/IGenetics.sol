@@ -5,7 +5,7 @@ interface IGenetics {
     struct Trait {
         uint256 value;
         uint256 dominance; // 0-100, determines inheritance probability
-        bool mutable;      // Can this trait be modified through evolution
+        bool isMutable;    // Can this trait be modified through evolution
     }
 
     struct DNA {

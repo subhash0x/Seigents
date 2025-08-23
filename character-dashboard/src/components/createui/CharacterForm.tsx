@@ -20,7 +20,8 @@ import { formatEther, parseEther } from "viem";
 import { seiTokenFactoryAbi } from "./seiTokenFactoryAbi";
 import { TOKEN_FACTORY_ADDRESS, CREATION_FEE_SEI } from "./constant";
 import { config } from "@/components/evm-provider";
-import { writeContract } from "wagmi";
+import { writeContract } from "@wagmi/core";
+import { waitForTransactionReceipt } from "@wagmi/core";
 
 const CREATION_FEE = parseEther(CREATION_FEE_SEI); // 0.1 SEI
 const MIN_SEI_BALANCE = parseEther("0.15"); // 0.15 SEI (0.1 for creation + 0.05 for gas)
@@ -128,7 +129,7 @@ export function CharacterForm({
 		addLog("loading", `Waiting for transaction confirmation... (${hash})`);
 
 		try {
-			const receipt = await config.publicClient.waitForTransactionReceipt({
+			const receipt = await waitForTransactionReceipt(config, {
 				hash: hash,
 			});
 

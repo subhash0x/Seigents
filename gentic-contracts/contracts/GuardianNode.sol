@@ -26,7 +26,7 @@ contract GuardianNode is AccessControl {
     event StakeUpdated(address guardian, uint256 newStake);
 
     constructor(address _stakingToken) {
-        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
         stakingToken = IERC20(_stakingToken);
     }
 
@@ -35,7 +35,7 @@ contract GuardianNode is AccessControl {
         require(totalGuardians < MAX_GUARDIANS, "Max guardians reached");
         require(!guardians[_guardian].isActive, "Already a guardian");
         
-        _setupRole(GUARDIAN_ROLE, _guardian);
+        _grantRole(GUARDIAN_ROLE, _guardian);
         guardians[_guardian] = Guardian({
             addr: _guardian,
             stake: 0,

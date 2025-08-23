@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "./AgentToken.sol";
+import "./token/AgentToken.sol";
 import "./GeneticAgent.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract AgentFactory is Ownable {
     event AgentDeployed(address agentToken, address geneticAgent);
