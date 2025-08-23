@@ -7,7 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { EVMProvider } from "@/components/evm-provider";
 function App() {
 	return (
-		<ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme" disableTransition>
+		<ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
 			<EVMProvider>
 				<div className="min-h-screen">
 					<Router>

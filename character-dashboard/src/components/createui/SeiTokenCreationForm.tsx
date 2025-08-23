@@ -14,7 +14,7 @@ import { AlertCircle, Loader2 } from "lucide-react";
 import { seiTokenFactoryAbi } from "./seiTokenFactoryAbi";
 import { TOKEN_FACTORY_ADDRESS, CREATION_FEE_SEI } from "./constant";
 import { TokenData } from "@/types";
-import { writeContract } from "@wagmi/core";
+import { writeContract } from "wagmi";
 import { config } from "@/config/wagmi";
 
 interface TokenFormProps {
