@@ -2,14 +2,22 @@
   "version": 2,
   "builds": [
     {
-      "src": "aiserver/index-mongodb.ts",
+      "src": "index-mongodb.ts",
       "use": "@vercel/node"
     }
   ],
-  "rewrites": [
+  "routes": [
     {
-      "source": "/:path*",
-      "destination": "/aiserver/index-mongodb.ts"
+      "src": "/(.*)",
+      "dest": "/index-mongodb.ts"
     }
-  ]
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "functions": {
+    "index-mongodb.ts": {
+      "maxDuration": 30
+    }
+  }
 }

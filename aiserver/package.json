@@ -6,9 +6,10 @@
   "type": "module",
   "scripts": {
     "start": "node dist/index-mongodb.js",
+    "build": "tsc",
+    "vercel-build": "npm run build",
     "dev": "tsx index-mongodb.ts",
     "dev-old": "ts-node --esm index.ts",
-    "build": "tsc",
     "migrate": "tsx scripts/migrate-characters.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
