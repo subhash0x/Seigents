@@ -114,3 +114,4 @@ build-info/
 
 # Local development files
 .local/
+.vercel
