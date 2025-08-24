@@ -423,30 +423,12 @@ const GameCard = ({
                 {shortenAddress(game.evm_address)}
               </Badge>
             )}
-                                         {game.token?.address && (
-           <Badge variant="outline" className="font-mono">
-             {shortenAddress(game.token.address)}
-           </Badge>
-         )}
-         {/* Token Metrics for regular games */}
-         {game.token?.address && (
-           <div className="mt-3">
-             <TokenMetrics
-               tokenData={{
-                 address: game.token.address,
-                 name: game.name,
-                 symbol: `GAME${game.name.slice(0, 2).toUpperCase()}`,
-                 tokenHolders: 800,
-                 volume24h: 8000,
-                 circulatingSupply: 1200000,
-                 totalSupply: 10000000,
-                 marketCap: 300000,
-                 currentPrice: 0.25,
-               }}
-               className="mt-3"
-             />
-           </div>
-         )}
+            {game.token?.address && (
+              <Badge variant="outline" className="font-mono">
+                {shortenAddress(game.token.address)}
+              </Badge>
+            )}
+            {/* Token Metrics */}
             {game.token?.address && (
               <div className="mt-4">
                 <TokenMetrics
